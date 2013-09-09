@@ -1,0 +1,5 @@
+C:\PolypelxPortal_WCF\PolypelxPortal_BAL\PolypelxPortal_BAL\bin\Debug\PolypelxPortal_BAL.dll
+C:\PolypelxPortal_WCF\PolypelxPortal_BAL\PolypelxPortal_BAL\bin\Debug\PolypelxPortal_BAL.pdb
+C:\PolypelxPortal_WCF\PolypelxPortal_BAL\PolypelxPortal_BAL\obj\Debug\ResolveAssemblyReference.cache
+C:\PolypelxPortal_WCF\PolypelxPortal_BAL\PolypelxPortal_BAL\obj\Debug\PolypelxPortal_BAL.dll
+C:\PolypelxPortal_WCF\PolypelxPortal_BAL\PolypelxPortal_BAL\obj\Debug\PolypelxPortal_BAL.pdb

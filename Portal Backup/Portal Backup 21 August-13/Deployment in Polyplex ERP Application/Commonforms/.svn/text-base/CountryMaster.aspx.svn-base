@@ -1,0 +1,148 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Masters/EmptyMaster.master" AutoEventWireup="true"
+    CodeFile="CountryMaster.aspx.cs" Inherits="Commonforms_CountryMaster" %>
+
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
+<%@ Register Src="~/controls/MyMessageBox.ascx" TagName="MyMessageBox" TagPrefix="uc1" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+    <link href="../CSS/grid.css" type="text/css" rel="Stylesheet" />
+    <style type="text/css">
+        .customCalloutStyle div, .customCalloutStyle td
+        {
+            border: solid 1px Black;
+            background-color: #BDDEFF;
+            color: Black;
+            filter: alpha(opacity=80);
+            opacity: 0.8;
+        }
+    </style>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+    <asp:ToolkitScriptManager ID="ToolkitScript" runat="server">
+    </asp:ToolkitScriptManager>
+    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+        <ContentTemplate>
+            <uc1:MyMessageBox ID="MyMessageBoxInfo" runat="server" ShowCloseButton="true" />
+            <asp:Panel ID="Panel1" runat="server">
+                <br />
+                <div align="center">
+                    <table>
+                        <tr>
+                            <td align="right">
+                                <strong>Search:</strong>
+                            </td>
+                            <td align="left">
+                                <asp:TextBox ID="txtSearch" runat="server"></asp:TextBox>
+                </div>
+                </td>
+                <td align="left">
+                    &nbsp;&nbsp;
+                    <asp:ImageButton ID="btnSearch" runat="server" ImageUrl="~/Images/Search-32.png"
+                        CausesValidation="false" OnClick="btnSearch_Click" />
+                </td>
+                </tr> </table>
+                <br />
+                <table width="100%" cellpadding="3px">
+                    <tr>
+                        <td colspan="2">
+                            <center>
+                                <asp:Panel ID="Panel2" runat="server">
+                                    <asp:GridView ID="GridDisplay" runat="server" AllowPaging="True" PageSize="5" EmptyDataText="No Country Added."
+                                        ShowHeaderWhenEmpty="True" AutoGenerateColumns="False" DataKeyNames="Id" CssClass="GridViewStyle"
+                                        OnPageIndexChanging="GridDisplay_PageIndexChanging" OnSelectedIndexChanged="GridDisplay_SelectedIndexChanged">
+                                        <Columns>
+                                            <asp:TemplateField HeaderText="Edit">
+                                                <ItemTemplate>
+                                                    <center>
+                                                        <asp:ImageButton ID="imgsel" runat="server" CausesValidation="False" CommandName="Select"
+                                                            ImageUrl="~/Images/chkbxuncheck.png" Text="Select" /></center>
+                                                </ItemTemplate>
+                                                <ItemStyle Width="60px" />
+                                            </asp:TemplateField>
+                                            <asp:BoundField DataField="CountryCode" HeaderText="Country Code" ItemStyle-Width="100px" />
+                                            <asp:BoundField DataField="Description" HeaderText="Description" ItemStyle-HorizontalAlign="Left" ItemStyle-Width="200px" />
+                                        </Columns>
+                                        <RowStyle CssClass="RowStyle" />
+                                        <SelectedRowStyle CssClass="SelectedRowStyle" />
+                                        <PagerStyle CssClass="PagerStyle" />
+                                        <AlternatingRowStyle CssClass="AltRowStyle" />
+                                        <HeaderStyle CssClass="HeaderStyle" />
+                                    </asp:GridView>
+                                </asp:Panel>
+                            </center>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        </td>
+                        <td>
+                            &nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="50%">
+                            <div align="right">
+                                Country Code:<span style="color: Red">*</span></div>
+                        </td>
+                        <td>
+                            <div align="left">
+                                <asp:TextBox ID="txtCountryCode" runat="server" MaxLength="3" Style="text-transform: uppercase"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtCountryCode"
+                                    ErrorMessage="Mandatory Field" Display="None"></asp:RequiredFieldValidator>
+                                <asp:ValidatorCalloutExtender ID="RequiredFieldValidator1_ValidatorCalloutExtender"
+                                    CssClass="customCalloutStyle" runat="server" Enabled="True" TargetControlID="RequiredFieldValidator1">
+                                </asp:ValidatorCalloutExtender>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div align="right">
+                                Country Name:<span style="color: Red">*</span></div>
+                        </td>
+                        <td>
+                            <div align="left">
+                                <asp:TextBox ID="txtcountryName" runat="server" MaxLength="30"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtcountryName"
+                                    ErrorMessage="Mandatory Field" Display="None"></asp:RequiredFieldValidator>
+                                <asp:ValidatorCalloutExtender ID="RequiredFieldValidator2_ValidatorCalloutExtender"
+                                    CssClass="customCalloutStyle" runat="server" Enabled="True" TargetControlID="RequiredFieldValidator2">
+                                </asp:ValidatorCalloutExtender>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div align="right">
+                                Active Status</div>
+                        </td>
+                        <td>
+                            <div align="left">
+                                <asp:CheckBox ID="chkActiveStatus" runat="server" Checked="true" /></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            &nbsp;
+                        </td>
+                        <td>
+                            &nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div align="right">
+                                <asp:ImageButton ID="btnUpdate" runat="server" ImageUrl="~/Images/btn_update.png"
+                                    OnClick="btnUpdate_Click" /></div>
+                        </td>
+                        <td align="left">
+                            <asp:ImageButton ID="btnAdd" runat="server" ImageUrl="~/Images/btnAdd.png" OnClick="btnAdd_Click" />&nbsp;&nbsp;
+                            <asp:ImageButton ID="btncancel" runat="server" ImageUrl="~/Images/btnCancel.png"
+                                CausesValidation="false" OnClick="btncancel_Click" />
+                        </td>
+                    </tr>
+                </table>
+            </asp:Panel>
+            <asp:HiddenField ID="hfid" runat="server" />
+        </ContentTemplate>
+    </asp:UpdatePanel>
+</asp:Content>

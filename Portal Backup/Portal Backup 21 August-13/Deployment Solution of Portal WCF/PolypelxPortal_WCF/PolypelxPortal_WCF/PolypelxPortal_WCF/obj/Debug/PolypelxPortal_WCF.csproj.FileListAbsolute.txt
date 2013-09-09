@@ -1,0 +1,10 @@
+C:\PolypelxPortal_WCF\PolypelxPortal_WCF\PolypelxPortal_WCF\bin\PolypelxPortal_WCF.dll
+C:\PolypelxPortal_WCF\PolypelxPortal_WCF\PolypelxPortal_WCF\bin\PolypelxPortal_WCF.pdb
+C:\PolypelxPortal_WCF\PolypelxPortal_WCF\PolypelxPortal_WCF\obj\Debug\ResolveAssemblyReference.cache
+C:\PolypelxPortal_WCF\PolypelxPortal_WCF\PolypelxPortal_WCF\obj\Debug\PolypelxPortal_WCF.dll
+C:\PolypelxPortal_WCF\PolypelxPortal_WCF\PolypelxPortal_WCF\obj\Debug\PolypelxPortal_WCF.pdb
+C:\PolypelxPortal_WCF\PolypelxPortal_WCF\PolypelxPortal_WCF\bin\PolypelxPortal_BAL.dll
+C:\PolypelxPortal_WCF\PolypelxPortal_WCF\PolypelxPortal_WCF\bin\PolypelxPortal_DAL.pdb
+C:\PolypelxPortal_WCF\PolypelxPortal_WCF\PolypelxPortal_WCF\bin\PolypelxPortal_BAL.pdb
+C:\PolypelxPortal_WCF\PolypelxPortal_WCF\PolypelxPortal_WCF\bin\Newtonsoft.Json.dll
+C:\PolypelxPortal_WCF\PolypelxPortal_WCF\PolypelxPortal_WCF\bin\PolypelxPortal_DAL.dll

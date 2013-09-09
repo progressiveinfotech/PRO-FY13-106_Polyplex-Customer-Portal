@@ -1,0 +1,214 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Data;
+using System.Drawing;
+
+public partial class Commonforms_CountryMaster : System.Web.UI.Page
+{
+    Common_Message commsg = new Common_Message();
+    string tableName = "FA_CountryClassmst";
+    MasterWithGrid cs = new MasterWithGrid();
+    Common cmn = new Common();
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        Label lbl = (Label)Master.FindControl("lbl_PageHeader");
+        lbl.Text = "Country Master";
+
+        if (!IsPostBack)
+        {
+            if (Session["UserID"] == null)
+            {
+                Server.Transfer("../SessionExpired.aspx");
+            }
+            else
+            {
+                try
+                {
+                    btnUpdate.Visible = false;
+                    btncancel.Visible = false;
+                    makeGrid();
+                }
+                catch (Exception ex)
+                {
+                }
+            }
+        }
+
+    }
+
+    protected void makeGrid()
+    {
+        try
+        {
+            string sql = "select * from " + tableName + " where CountryCode like '%" + txtSearch.Text.Trim() + "%' OR Description like '%" + txtSearch.Text.Trim() + "%' order by CountryCode";
+            DataTable dt = cs.getGrid(sql);
+            GridDisplay.DataSource = dt;
+            GridDisplay.DataBind();
+        }
+        catch
+        { }
+    }
+    protected void btnSearch_Click(object sender, ImageClickEventArgs e)
+    {
+        makeGrid();
+    }
+   
+    protected void btnAdd_Click(object sender, ImageClickEventArgs e)
+    {
+        try
+        {
+            string where="CountryCode='"+txtCountryCode.Text.Trim().ToUpper()+"'";
+            if (cs.IfCodeExists(where, tableName))
+            {
+                string message = "A record with this code already exists.";
+                MyMessageBoxInfo.Show(MyMessageBox.MessageType.Error, message, 125, 300);
+            }
+
+            else
+            {
+                if (saveRecords(txtCountryCode.Text.ToUpper().Trim(), txtcountryName.Text, chkActiveStatus.Checked))
+                {
+                    string message = commsg.RecordSaved;
+                    MyMessageBoxInfo.Show(MyMessageBox.MessageType.Success, message, 125, 300);
+                    txtCountryCode.Text = "";
+                    txtcountryName.Text = "";
+                    chkActiveStatus.Checked = true;
+                    txtSearch.Text = "";
+                    makeGrid();
+                }
+                else
+                {
+                    string message = commsg.RecordNotSaved;
+                    MyMessageBoxInfo.Show(MyMessageBox.MessageType.Error, message, 125, 300);
+                }
+            }
+
+        }
+        catch (Exception ex)
+        {
+        }
+
+    }
+
+    protected bool saveRecords(string code, string name, bool active)
+    {
+        try
+        {
+           
+            string sql = @"INSERT INTO FA_CountryClassmst([CountryCode],[Description],[CreatedBy],[CreatedDate],[Active])
+                            values ('" + code + "','" + name + "','" + Session["UserID"] +"','"+DateTime.Now.ToString()+ "','" + active + "')";
+            cmn.executeSimpleQry(sql);
+            return true;
+        }
+        catch (Exception ex)
+        {
+            return false;
+        }
+
+    }
+    protected void btnUpdate_Click(object sender, ImageClickEventArgs e)
+    {
+        try
+        {
+
+            if (UpdateRecords(hfid.Value, txtcountryName.Text, chkActiveStatus.Checked))
+            {
+                string message = commsg.UpdatedRecord;
+                MyMessageBoxInfo.Show(MyMessageBox.MessageType.Success, message, 125, 300);
+                txtCountryCode.Text = "";
+                txtCountryCode.Enabled = true;
+                txtcountryName.Text = "";
+                chkActiveStatus.Checked = true;
+                btnUpdate.Visible = false;
+                btncancel.Visible = false;
+                btnAdd.Visible = true;
+                txtSearch.Text = "";
+                makeGrid();
+               
+
+
+            }
+            else
+            {
+                string message = commsg.RecordNotUpdated;
+                MyMessageBoxInfo.Show(MyMessageBox.MessageType.Error, message, 125, 300);
+            }
+
+
+        }
+        catch (Exception ex)
+        {
+        }
+    }
+
+    protected bool UpdateRecords(string id, string Name, bool status)
+    {
+        try
+        {
+
+            string sql = "Update FA_CountryClassmst set [Description]='" + Name + "',[Active]='" + status + "', LastChange='" + Session["UserID"] +"', LastChangeDate='"+DateTime.Now+"' where Id='" + id + "'";
+            cmn.executeSimpleQry(sql);
+            return true;
+        }
+        catch (Exception ex)
+        {
+            return false;
+        }
+
+
+    }
+    protected void GridDisplay_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        int DataKey = int.Parse(GridDisplay.SelectedDataKey.Value.ToString());
+        hfid.Value = DataKey.ToString();
+        DataTable dt = getRecordById(DataKey.ToString());
+        txtCountryCode.Text = dt.Rows[0]["CountryCode"].ToString();
+        txtCountryCode.Enabled = false;
+        txtcountryName.Text = dt.Rows[0]["Description"].ToString();
+        chkActiveStatus.Checked = bool.Parse(dt.Rows[0]["Active"].ToString());
+        btnAdd.Visible = false;
+        btnUpdate.Visible = true;
+        btncancel.Visible = true;
+        foreach (GridViewRow oldrow in GridDisplay.Rows)
+        {
+            ImageButton imgbutton = (ImageButton)oldrow.FindControl("imgsel");
+            imgbutton.ImageUrl = "~/Images/chkbxuncheck.png";
+            oldrow.BackColor = Color.White;
+        }
+        ImageButton img = (ImageButton)GridDisplay.Rows[GridDisplay.SelectedIndex].FindControl("imgsel");
+        img.ImageUrl = "~/Images/chkbxcheck.png";
+    }
+
+    protected DataTable getRecordById(string id)
+    {
+       
+        string sql = "Select * from "+tableName+" where Id='" + id + "'";
+        DataTable dt = cmn.executeSqlQry(sql);
+        return dt;
+
+   
+    }
+    protected void GridDisplay_PageIndexChanging(object sender, GridViewPageEventArgs e)
+    {
+        GridDisplay.PageIndex = e.NewPageIndex;
+        makeGrid();
+
+    }
+
+  
+    protected void btncancel_Click(object sender, ImageClickEventArgs e)
+    {
+        btnAdd.Visible = true;
+        btnUpdate.Visible = false;
+        btncancel.Visible = false;
+        txtCountryCode.Text = "";
+        txtCountryCode.Enabled = true;
+        txtcountryName.Text = "";
+        chkActiveStatus.Checked = false;
+
+    }
+}

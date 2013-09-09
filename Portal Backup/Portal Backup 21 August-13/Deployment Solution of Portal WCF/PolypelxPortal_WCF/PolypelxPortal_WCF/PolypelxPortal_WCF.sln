@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PolypelxPortal_WCF", "PolypelxPortal_WCF\PolypelxPortal_WCF.csproj", "{E1F6D939-700F-41B4-BF3A-254C310F5030}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PolypelxPortal_BAL", "..\PolypelxPortal_BAL\PolypelxPortal_BAL\PolypelxPortal_BAL.csproj", "{9E611330-4456-4E32-8571-02722602468F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PolypelxPortal_DAL", "..\PolypelxPortal_DAL\PolypelxPortal_DAL\PolypelxPortal_DAL.csproj", "{9C134183-7A49-42E6-B32C-EE89D8EF7ACE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E1F6D939-700F-41B4-BF3A-254C310F5030}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1F6D939-700F-41B4-BF3A-254C310F5030}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1F6D939-700F-41B4-BF3A-254C310F5030}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1F6D939-700F-41B4-BF3A-254C310F5030}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E611330-4456-4E32-8571-02722602468F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E611330-4456-4E32-8571-02722602468F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E611330-4456-4E32-8571-02722602468F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E611330-4456-4E32-8571-02722602468F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C134183-7A49-42E6-B32C-EE89D8EF7ACE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C134183-7A49-42E6-B32C-EE89D8EF7ACE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C134183-7A49-42E6-B32C-EE89D8EF7ACE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C134183-7A49-42E6-B32C-EE89D8EF7ACE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

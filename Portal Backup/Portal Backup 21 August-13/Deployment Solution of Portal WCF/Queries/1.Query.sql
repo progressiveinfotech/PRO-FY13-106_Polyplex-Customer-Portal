@@ -1,0 +1,2 @@
+ALTER TABLE Sal_Glb_PerformaInvoiceHeader_Tran ADD QuoteRequestId bigint
+GO

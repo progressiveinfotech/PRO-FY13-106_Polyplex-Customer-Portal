@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="PolypelxPortal_WCF.PortalService" CodeBehind="PortalService.svc.cs" %>
